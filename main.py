@@ -1,3 +1,8 @@
+"""
+Zack Xiang & Isaac Scott
+A script that records and saves the data from the RS-232 port of RS Flow Anemometer.
+"""
+
 import serial
 import struct
 import csv
@@ -70,6 +75,7 @@ wind_speakers = [
 
 second = 0
 
+# Stop the program for any console input, or certain time is reached
 while KillSwitch.is_off() and second < 2000:
     for speaker in wind_speakers:
         if second % 30 == 0:
@@ -91,6 +97,6 @@ while KillSwitch.is_off() and second < 2000:
     print(second)
     second += 1
 
-# Save values
+# Save recorded values
 for speaker in wind_speakers:
     speaker.save_values()
