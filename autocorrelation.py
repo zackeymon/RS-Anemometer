@@ -27,13 +27,13 @@ data_dir = 'grass'
 labels = ('Adam', 'Brian', 'Camilla')
 
 for subdir, dirs, files in os.walk(data_dir):
-    for file in files:
+    for i, file in enumerate(files):
         data = np.loadtxt(os.path.join(subdir, file))
         Rs = stop_if_below_zero(auto_correlation(data))
-        plt.plot(Rs, label=file)
-        print(sum(Rs))
+        plt.plot(Rs, label=labels[i])
+        print("{}: {:.4f}".format(labels[i], sum(Rs)))
 
 plt.legend(loc=0)
-plt.xlabel(r'$\tau (s)$')
-plt.ylabel(r'$R(\tau)$')
+plt.xlabel(r'$\tau (s)$', fontsize=14)
+plt.ylabel(r'$R(\tau)$', fontsize=14)
 plt.show()
